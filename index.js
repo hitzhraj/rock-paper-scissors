@@ -13,33 +13,59 @@ const getComputerChoice = () => {
 }
 
 // function to play a single round of game
-
-const rps = (playerSelection, computerSelection) => {
+let userScore = 0;
+let computerScore = 0;
+const rps = (playerSelection, computerSelection) => {    
     if (playerSelection.toLowerCase() === 'rock' && computerSelection === 'rock') {
-        return 'Its a tie!'
+        return `The player chose ${playerSelection.toUpperCase()} and the computer chose ROCK. Its a tie! \n${userScore}:${computerScore}`;
     } else if (playerSelection.toLowerCase() === 'rock' && computerSelection === 'paper') {
-        return 'The computer wins!'
+        computerScore += 1;
+        return `The player chose ${playerSelection.toUpperCase()} and the computer chose PAPER. The computer wins! \n${userScore}:${computerScore}`;
     } else if (playerSelection.toLowerCase() === 'rock' && computerSelection === 'scissors') {
-        return 'The user wins!'
+        userScore += 1;
+        return `The player chose ${playerSelection.toUpperCase()} and the computer chose SCISSORS. The player wins! \n${userScore}:${computerScore}`;
     }
 
     if (playerSelection.toLowerCase() === 'paper' && computerSelection === 'paper') {
-        return 'Its a tie!'
+        return `The player chose ${playerSelection.toUpperCase()} and the computer chose PAPER. Its a tie! \n${userScore}:${computerScore}`
     } else if (playerSelection.toLowerCase() === 'paper' && computerSelection === 'rock') {
-        return 'The user wins!'
+        userScore += 1;
+        return `The player chose ${playerSelection.toUpperCase()} and the computer chose ROCK. The player wins! \n${userScore}:${computerScore}`
     } else if (playerSelection.toLowerCase() === 'paper' && computerSelection === 'scissors') {
-        return 'The computer wins!'
+        computerScore += 1;
+        return `The player chose ${playerSelection.toUpperCase()} and the computer chose SCISSORS. The computer wins! \n${userScore}:${computerScore}`
     }
 
     if (playerSelection.toLowerCase() === 'scissors' && computerSelection === 'scissors') {
-        return 'Its a tie!'
+        return `The player chose ${playerSelection.toUpperCase()} and the computer chose SCISSORS. Its a tie! \n${userScore}:${computerScore}`
     } else if (playerSelection.toLowerCase() === 'scissors' && computerSelection === 'rock') {
-        return 'The computer wins!'
+        computerScore += 1;
+        return `The player chose ${playerSelection.toUpperCase()} and the computer chose ROCK. The computer wins! \n${userScore}:${computerScore}`
     } else if (playerSelection.toLowerCase() === 'scissors' && computerSelection === 'paper') {
-        return 'The user wins!'
+        userScore += 1;
+        return `The player chose ${playerSelection.toUpperCase()} and the computer chose PAPER. The player wins! \n${userScore}:${computerScore}`
     }
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
+
 // console.log(rps(playerSelection, computerSelection));
+
+//The actual game function
+
+const game = () => {
+
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = prompt("Enter your input (rock/paper/scissors):");
+        const computerSelection = getComputerChoice();
+        console.log(rps(playerSelection, computerSelection));  
+    }
+    if (userScore > computerScore) {
+        return "The player wins"
+    } else if (userScore < computerScore) {
+        return "The computer wins"
+    } else {
+        return "Its a tie!"
+    }
+}
+
+game();
